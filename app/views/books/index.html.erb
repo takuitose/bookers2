@@ -3,40 +3,64 @@
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-        <% if @user.image.attached? %>
-          <%= image_tag @user.image, size: "100x100" %>
-        <% else %>
-          <%= image_tag 'no_image', size: "100x100" %>
-        <% end %>
+        <%= image_tag @user.get_profile_image %>
+        <table class="table">
+          <% @users.each do |user| %>
+          <tbody>
+              <tr></tr>
+              <tr>
+                <th>name</th>
+                <th><%= user.name %></th>
+              </tr>
+              <tr>
+                <th>introduction</th>
+                <th><%= user.introduction %></th>
+              </tr>
+          </tbody>
+          <% end %>
+        </table>
+        <%= link_to "user_edit", edit_user_path(@user) %>
+
+        <div class="row">
+          <% f.submit 'Create Book', class: "btn btn-outline-secondary btn-block" %>
+        </div>
+
       <h2 class="mt-3">New Book</h2>
-      <%= form_with model: book.new do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </div>
-      <div class="form-group">
-        <%= f.label :opinion %>
-        <%= f.text_area :body %>
-      </div>
-      <div class="form-group">
-        <% f.submit 'Create Book', class: "btn btn-success" %>
-      </div>
+      <%= form_with model: @book do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        <div class="form-group">
+          <%= f.label :opinion %>
+          <%= f.text_area :body %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Create Book', class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thred>
+          <tr>
+            <td></td>
+            <td>Title</td>
+            <td>Opinion</td>
+            <td colspan="3"></td>
+          </tr>
+        </thred>
+
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
-
-<div class="col-md-8 offset-md-1">
-  <h2>Books</h2>
-  <table class="table table-hover table-inverse">
-    <thred>
-      <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
-        <th colspan="3"></th>
-      </tr>
-    </thred>
-    <tbody></tbody>
-  </table>
-  <% @books.each do |book| %>
 </div>
