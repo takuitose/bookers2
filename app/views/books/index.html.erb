@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <%= render partial: 'list', locals: {book: @book, user: @user, new: @new } %>
+      <%= render partial: 'list', locals: {user: @user, book: @book, new: @new } %>
     </div>
 
     <div class="col-md-8 offset-md-1">
@@ -32,7 +32,7 @@
           <% @books.each do |book| %>
           <tr>
             <td>
-              <%= link_to @user_path do %>
+              <%= link_to user_path(book.user) do %>
                 <%= image_tag @user.get_profile_image(80, 80) %>
               <% end %>
             </td>
